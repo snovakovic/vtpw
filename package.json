@@ -17,7 +17,7 @@
 		"commands": [
 			{
 				"command": "extension.vtpw",
-				"title": "Create shadow .ts file from .vue file that sync changes back to original component"
+				"title": "vtpw: Create shadow .ts file from .vue file"
 			}
 		]
 	},
