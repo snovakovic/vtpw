@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
-import { last } from './utils';
 
 export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('extension.vtpw', async () => {
@@ -8,31 +7,25 @@ export function activate(context: vscode.ExtensionContext) {
 		const { workspace } = vscode;
 
 		if (!activeTextEditor || !workspace || !workspace.workspaceFolders) {
-			vscode.window.showWarningMessage(`No active .vue files`);
+			vscode.window.showWarningMessage(`Works only for .vue files`);
 			return;
 		}
+
 		const activeFileLocation = activeTextEditor.document.fileName;
-
 		if (!activeFileLocation.endsWith('.vue')) {
-			vscode.window.showWarningMessage(`Works only for .vue single file components`);
+			vscode.window.showWarningMessage(`Works only for .vue files`);
 			return;
 		}
 
-		const activeFileName = last(activeFileLocation.split('/'));
 		vscode.window.showInformationMessage(`active file => ${activeFileLocation}`);
 
-		const activeFileContent = activeTextEditor.document.getText();
+		// const activeFileContent = activeTextEditor.document.getText();
 
-		// TODO: rootPath is depricated (can have multiple workspace)
-		// Maybe best to pick based on activeFileName??
-		var dir = `${workspace.rootPath}/vtpw_temp`;
-		// TODO convert to async asn use fsStat (as exists is depricated)
-		if (!fs.existsSync(dir)) {
-			fs.mkdirSync(dir);
-		}
+		// Create new .vtpw.ts file next to .vue file
+		// Have to be in same location in order for all imports to work as expected
+		const tsFile = `${activeFileLocation.replace('.vue', '.vtpw.ts')}`;
 
-		// TODO change to async version
-		const tsFile = `${dir}/${activeFileName.replace('vue', '.vtpw.ts')}`;
+		// TODO: check to async version
 		fs.copyFileSync(activeFileLocation, tsFile);
 
 		const tsFileDocument = await workspace.openTextDocument(tsFile);
