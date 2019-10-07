@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
+import { commentOutVueComponentTags } from './utils';
 
 export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('extension.vtpw', async () => {
@@ -17,26 +18,23 @@ export function activate(context: vscode.ExtensionContext) {
 			return;
 		}
 
-		vscode.window.showInformationMessage(`active file => ${activeFileLocation}`);
-
-		// const activeFileContent = activeTextEditor.document.getText();
+		const activeFileContent = activeTextEditor.document.getText();
+		const validTsFileContent = commentOutVueComponentTags(activeFileContent);
 
 		// Create new .vtpw.ts file next to .vue file
 		// Have to be in same location in order for all imports to work as expected
-		const tsFile = `${activeFileLocation.replace('.vue', '.vtpw.ts')}`;
+		const tsFileLocation = `${activeFileLocation.replace('.vue', '.vtpw.ts')}`;
 
-		// TODO: check to async version
-		fs.copyFileSync(activeFileLocation, tsFile);
+		// TODO: change to async version
+		fs.writeFileSync(tsFileLocation, validTsFileContent);
 
-		const tsFileDocument = await workspace.openTextDocument(tsFile);
+		// Bring focus to newly created ts file (TODO: cursor position??)
+		const tsFileDocument = await workspace.openTextDocument(tsFileLocation);
 		vscode.window.showTextDocument(tsFileDocument);
 
 		workspace.onDidSaveTextDocument((doc) => {
 			console.log('text documetn saved');
 		});
-
-		// Display a message box to the user
-		vscode.window.showInformationMessage(`Folder created ${vscode.workspace.rootPath}`);
 	});
 
 	context.subscriptions.push(disposable);

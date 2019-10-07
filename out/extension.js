@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const vscode = require("vscode");
 const fs = require("fs");
+const utils_1 = require("./utils");
 function activate(context) {
     let disposable = vscode.commands.registerCommand('extension.vtpw', () => __awaiter(this, void 0, void 0, function* () {
         const { activeTextEditor } = vscode.window;
@@ -24,20 +25,19 @@ function activate(context) {
             vscode.window.showWarningMessage(`Works only for .vue files`);
             return;
         }
-        vscode.window.showInformationMessage(`active file => ${activeFileLocation}`);
-        // const activeFileContent = activeTextEditor.document.getText();
+        const activeFileContent = activeTextEditor.document.getText();
+        const validTsFileContent = utils_1.commentOutVueComponentTags(activeFileContent);
         // Create new .vtpw.ts file next to .vue file
         // Have to be in same location in order for all imports to work as expected
-        const tsFile = `${activeFileLocation.replace('.vue', '.vtpw.ts')}`;
-        // TODO: check to async version
-        fs.copyFileSync(activeFileLocation, tsFile);
-        const tsFileDocument = yield workspace.openTextDocument(tsFile);
+        const tsFileLocation = `${activeFileLocation.replace('.vue', '.vtpw.ts')}`;
+        // TODO: change to async version
+        fs.writeFileSync(tsFileLocation, validTsFileContent);
+        // Bring focus to newly created ts file (TODO: cursor position??)
+        const tsFileDocument = yield workspace.openTextDocument(tsFileLocation);
         vscode.window.showTextDocument(tsFileDocument);
         workspace.onDidSaveTextDocument((doc) => {
             console.log('text documetn saved');
         });
-        // Display a message box to the user
-        vscode.window.showInformationMessage(`Folder created ${vscode.workspace.rootPath}`);
     }));
     context.subscriptions.push(disposable);
 }
