@@ -12,18 +12,18 @@ export function activate(context: vscode.ExtensionContext) {
 			return;
 		}
 
-		const activeFileLocation = activeTextEditor.document.fileName;
-		if (!activeFileLocation.endsWith('.vue')) {
+		const vueFileLocation = activeTextEditor.document.fileName;
+		if (!vueFileLocation.endsWith('.vue')) {
 			vscode.window.showWarningMessage(`Works only for .vue files`);
 			return;
 		}
 
-		const activeFileContent = activeTextEditor.document.getText();
-		const validTsFileContent = commentOutVueComponentTags(activeFileContent);
+		const vueFileContent = activeTextEditor.document.getText();
+		const validTsFileContent = commentOutVueComponentTags(vueFileContent);
 
 		// Create new .vtpw.ts file next to .vue file
 		// Have to be in same location in order for all imports to work as expected
-		const tsFileLocation = `${activeFileLocation.replace('.vue', '.vtpw.ts')}`;
+		const tsFileLocation = `${vueFileLocation.replace('.vue', '.vtpw.ts')}`;
 
 		// TODO: change to async version
 		fs.writeFileSync(tsFileLocation, validTsFileContent);
