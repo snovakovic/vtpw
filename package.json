@@ -17,7 +17,7 @@
 		"commands": [
 			{
 				"command": "extension.vtpw",
-				"title": "vtpw: Create shadow .ts file from .vue file"
+				"title": "vtpw: toggle between shadow .ts file and .vue file"
 			}
 		]
 	},

@@ -19,12 +19,24 @@ export function activate(context: vscode.ExtensionContext) {
 			return;
 		}
 
-		const vueFileLocation = activeTextEditor.document.fileName;
-		if (!vueFileLocation.endsWith('.vue')) {
+		const activeFileLocation = activeTextEditor.document.fileName;
+
+		// If command is executed in shadow .ts file save it, remove it and point back to vue file
+		// point back to origi
+		if(activeFileLocation.endsWith('.vtpw.ts')) {
+			removeFileIfExists(activeFileLocation);
+			const vueFileLocation = `${activeFileLocation.replace('.vtpw.ts', '.vue')}`;
+			const vueFileUri = vscode.Uri.file(vueFileLocation);
+			vscode.window.showTextDocument(vueFileUri);
+			return; // Stop execution
+		}
+
+		if (!activeFileLocation.endsWith('.vue')) {
 			vscode.window.showWarningMessage(`Works only for .vue files`);
 			return;
 		}
 
+		const vueFileLocation = activeFileLocation;
 		const vueFileContent = activeTextEditor.document.getText();
 		const validTsFileContent = commentOutVueComponentTags(vueFileContent);
 
@@ -39,22 +51,13 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.showTextDocument(tsFileUri);
 
 		// On saving shadow ts file sync changes back to vue file
+		// TODO: this seams to be called as many times as commadn have been executed time command is called (improve)
 		workspace.onDidSaveTextDocument((doc) => {
 			if(tsFileLocation === doc.fileName) {
 				const tsFileContent = doc.getText();
 				const validVueFileContent = revertCommentingOutOfVueTags(tsFileContent);
 
 				writeFile(vueFileLocation, validVueFileContent);
-			}
-		});
-
-		// On closing shadow ts file remove it from disk
-		// TODO: not triggered when closing new file???
-		// Maybe on other change check => vscode.window.visibleTextEditors and close if not in list
-		// Keeping destroyed flag or something
-		workspace.onDidCloseTextDocument((doc) => {
-			if(tsFileLocation === doc.fileName) {
-				removeFileIfExists(tsFileLocation);
 			}
 		});
 	});
