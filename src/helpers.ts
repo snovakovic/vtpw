@@ -12,7 +12,17 @@ export function setCursorPositionOfActiveFileTo(selection:vscode.Selection) {
       selection.anchor,
       selection.active,
     );
+
+    vscode.window.activeTextEditor.revealRange(
+      new vscode.Range(selection.active, selection.active),
+    );
   }
+}
+
+export function showFileNotCompatibleWarningMessage() {
+  vscode
+    .window
+    .showWarningMessage(`Works only in ${VUE_FILE_EXTENSION} or ${SHADOW_TS_FILE_EXTENSION} files`);
 }
 
 // File system helpers

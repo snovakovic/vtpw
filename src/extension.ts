@@ -9,6 +9,7 @@ import {
 	getVueFileLocationFromShadowTsFile,
 	getShadowTsFileLocationFromVueFile,
 	setCursorPositionOfActiveFileTo,
+	showFileNotCompatibleWarningMessage,
 } from './helpers';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -18,10 +19,6 @@ export function activate(context: vscode.ExtensionContext) {
 			syncShadowTsFileChangesWithVueFile(doc);
 		}
 	});
-
-	const showFileNotCompatibleWarningMessage = () => vscode
-		.window
-		.showWarningMessage(`Works only for .vue or .vtpw.ts files`);
 
 	let disposable = vscode.commands.registerCommand('extension.toggleShadowTsFile', async () => {
 		const { activeTextEditor } = vscode.window;
@@ -43,9 +40,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(disposable);
 }
-
-// this method is called when your extension is deactivated
-export function deactivate() { }
 
 // Implementations
 
