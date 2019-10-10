@@ -6,17 +6,20 @@ export const VUE_FILE_EXTENSION = '.vue';
 
 // VS Code plugin helpers
 
-export function setCursorPositionOfActiveFileTo(selection:vscode.Selection) {
-  if (vscode.window.activeTextEditor) {
-    vscode.window.activeTextEditor.selection = new vscode.Selection(
-      selection.anchor,
-      selection.active,
-    );
-
-    vscode.window.activeTextEditor.revealRange(
-      new vscode.Range(selection.active, selection.active),
-    );
+export function mirorCursorAndScrollPosition({ from, to } : {
+  from:vscode.TextEditor,
+  to?:vscode.TextEditor,
+}) {
+  if (!to) {
+    return;
   }
+
+  to.selection = new vscode.Selection(
+    from.selection.anchor,
+    from.selection.active,
+  );
+
+  to.revealRange(last(from.visibleRanges));
 }
 
 export function showFileNotCompatibleWarningMessage() {
@@ -80,3 +83,7 @@ export function revertCommentingOutOfVueTags(tsFile:string) {
     .replace('/*vtpw<script lang="ts">vtpw*/', '<script lang="ts">')
     .replace('/*vtpw</script>vtpw*/', '</script>');
 }
+
+// General helpers
+
+export const last = (arr:any[]) => arr[arr.length -1];

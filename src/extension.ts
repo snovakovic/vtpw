@@ -8,8 +8,8 @@ import {
 	writeFile,
 	getVueFileLocationFromShadowTsFile,
 	getShadowTsFileLocationFromVueFile,
-	setCursorPositionOfActiveFileTo,
 	showFileNotCompatibleWarningMessage,
+	mirorCursorAndScrollPosition,
 } from './helpers';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -45,7 +45,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 async function createShadowTsFileFromActiveVueFile(vueFileTextEditor:vscode.TextEditor) {
 	const vueFileLocation = vueFileTextEditor.document.fileName;
-	const vueFileCursorSelection = vueFileTextEditor.selection;
 	const vueFileContent = vueFileTextEditor.document.getText();
 
 	// 1) Comment out vue component tags to get valid TS content
@@ -59,12 +58,14 @@ async function createShadowTsFileFromActiveVueFile(vueFileTextEditor:vscode.Text
 	const tsFileUri = vscode.Uri.file(tsFileLocation);
 	await vscode.window.showTextDocument(tsFileUri);
 
-	// 4) Set cursor position of ts file to last cursor position of vue file
-	setCursorPositionOfActiveFileTo(vueFileCursorSelection);
+	// 4) Set cursor and scroll position of ts file to last position of vue file
+	mirorCursorAndScrollPosition({
+		from: vueFileTextEditor,
+		to: vscode.window.activeTextEditor,
+	});
 }
 
 async function removeActiveShadowTsFileAndPositionBackToOriginalVueFile(shadowTsFileTextEditor:vscode.TextEditor) {
-	const tsFileCursorPosition = shadowTsFileTextEditor.selection;
 	const tsFileLocation = shadowTsFileTextEditor.document.fileName;
 
 	// 1) Save TS file
@@ -79,7 +80,10 @@ async function removeActiveShadowTsFileAndPositionBackToOriginalVueFile(shadowTs
 	await vscode.window.showTextDocument(vueFileUri);
 
 	// 4) Set cursor position of vue file to last cursor position of shadow TS file
-	setCursorPositionOfActiveFileTo(tsFileCursorPosition);
+	mirorCursorAndScrollPosition({
+		from: shadowTsFileTextEditor,
+		to: vscode.window.activeTextEditor,
+	});
 }
 
 async function syncShadowTsFileChangesWithVueFile(tsFile:vscode.TextDocument) {
