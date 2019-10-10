@@ -1,6 +1,19 @@
 import * as fs from 'fs';
 
-export const last = <T>(arr:T[]) => arr[arr.length - 1];
+export const SHADOW_TS_FILE_EXTENSION = '.vtpw.ts';
+export const VUE_FILE_EXTENSION = '.vue';
+
+// File system helpers
+
+export function getVueFileLocationFromShadowTsFile(tsFileLocation:string) {
+  return `${tsFileLocation
+      .replace(SHADOW_TS_FILE_EXTENSION, VUE_FILE_EXTENSION)}`;
+
+}
+
+export function getShadowTsFileLocationFromVueFile(vueFileLocation:string) {
+  return `${vueFileLocation.replace(VUE_FILE_EXTENSION, SHADOW_TS_FILE_EXTENSION)}`;
+}
 
 export function removeFileIfExists(location:string) {
   fs.stat(location, (err) => {
@@ -21,6 +34,8 @@ export function writeFile(path:string, content:string) {
     });
   });
 }
+
+// Formating code helpers
 
 export function commentOutVueComponentTags(vueFile:string) {
   // TODO: improve with regex to be more flexible
