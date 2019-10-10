@@ -34,7 +34,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 		if(activeFileLocation.endsWith(SHADOW_TS_FILE_EXTENSION)) {
 			removeActiveShadowTsFileAndPositionBackToOriginalVueFile(activeTextEditor);
-		} else if (!activeFileLocation.endsWith(VUE_FILE_EXTENSION)) {
+		} else if (activeFileLocation.endsWith(VUE_FILE_EXTENSION)) {
 			createShadowTsFileFromActiveVueFile(activeTextEditor);
 		} else {
 			showFileNotCompatibleWarningMessage();
@@ -74,6 +74,7 @@ async function removeActiveShadowTsFileAndPositionBackToOriginalVueFile(shadowTs
 	const tsFileLocation = shadowTsFileTextEditor.document.fileName;
 
 	// 1) Save TS file
+	await shadowTsFileTextEditor.document.save();
 
 	// 2) Remove TS file
 	removeFileIfExists(tsFileLocation);
