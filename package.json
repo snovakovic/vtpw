@@ -9,6 +9,10 @@
 		"name": "Stefan Novakovic",
 		"url": "https://github.com/snovakovic/"
 	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/snovakovic/vtpw",
+	},
 	"engines": {
 		"vscode": "^1.38.0"
 	},
