@@ -19,7 +19,15 @@
 				"command": "extension.toggleShadowTsFile",
 				"title": "vtpw: toggle between shadow .ts file and .vue file"
 			}
-		]
+		],
+		"keybindings": [
+      {
+        "command": "extension.toggleShadowTsFile",
+        "key": "ctrl+alt+,",
+        "mac": "cmd+alt+l",
+        "when": "editorTextFocus"
+      }
+    ]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

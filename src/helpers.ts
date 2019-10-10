@@ -82,6 +82,8 @@ export function revertCommentingOutOfVueTags(tsFile:string) {
     // NOTE: can be multiple style tags on page
     .replace('/*<style', '<style')
     .replace('</style>*/', '</style>')
+    .replace('/*<style', '<style')
+    .replace('</style>*/', '</style>')
     // TODO: regex not working look into why??
     // .replace(new RegExp('\/\*<style', 'g'), '<style')
     // .replace(new RegExp('<\/style>\*\/', 'g'), '</style>')
