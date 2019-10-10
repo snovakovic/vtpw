@@ -3,7 +3,7 @@
 	"displayName": "vetur-typescript-performance-workaround",
 	"description": "Workaround for the issue with the performance and intelisense speed of vue single file components in vetur when used together with TypeScript.",
 	"version": "0.0.1",
-	"publisher": "Stefan Novakovic<stefan.novakovich@gmail.com>",
+	"publisher": "snovakovic",
 	"author": {
 		"email": "stefan.novakovich@gmail.com",
 		"name": "Stefan Novakovic",
@@ -16,19 +16,19 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.toggleShadowTsFile"
+		"onCommand:vtpw.toggleShadowTsFile"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.toggleShadowTsFile",
+				"command": "vtpw.toggleShadowTsFile",
 				"title": "vtpw: toggle between shadow .ts file and .vue file"
 			}
 		],
 		"keybindings": [
       {
-        "command": "extension.toggleShadowTsFile",
+        "command": "vtpw.toggleShadowTsFile",
         "key": "ctrl+alt+,",
         "mac": "cmd+alt+l",
         "when": "editorTextFocus"

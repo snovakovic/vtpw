@@ -20,7 +20,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	});
 
-	let disposable = vscode.commands.registerCommand('extension.toggleShadowTsFile', async () => {
+	let disposable = vscode.commands.registerCommand('vtpw.toggleShadowTsFile', async () => {
 		const { activeTextEditor } = vscode.window;
 		if (!activeTextEditor) {
 			showFileNotCompatibleWarningMessage();
