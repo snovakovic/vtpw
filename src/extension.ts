@@ -47,18 +47,21 @@ async function createShadowTsFileFromActiveVueFile(vueFileTextEditor:vscode.Text
 	const vueFileLocation = vueFileTextEditor.document.fileName;
 	const vueFileContent = vueFileTextEditor.document.getText();
 
-	// 1) Comment out vue component tags to get valid TS content
+	// 1) Save vue file changes
+	await vueFileTextEditor.document.save();
+
+	// 2) Comment out vue component tags to get valid TS content
 	const validTsFileContent = commentOutVueComponentTags(vueFileContent);
 
-	// 2) Create new shadow TS file next to original vue file
+	// 3) Create new shadow TS file next to original vue file
 	const tsFileLocation = getShadowTsFileLocationFromVueFile(vueFileLocation);
 	await writeFile(tsFileLocation, validTsFileContent);
 
-	// 3) Open newly created TS shadow file
+	// 4) Open newly created TS shadow file
 	const tsFileUri = vscode.Uri.file(tsFileLocation);
 	await vscode.window.showTextDocument(tsFileUri);
 
-	// 4) Set cursor and scroll position of ts file to last position of vue file
+	// 5) Set cursor and scroll position of ts file to last position of vue file
 	mirorCursorAndScrollPosition({
 		from: vueFileTextEditor,
 		to: vscode.window.activeTextEditor,
