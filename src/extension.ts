@@ -6,6 +6,9 @@ import {
 	writeFile,
 } from './helpers';
 
+const SHADOW_TS_FILE_EXTENSION = '.vtpw.ts';
+const VUE_FILE_EXTENSION = '.vue';
+
 export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('extension.vtpw', async () => {
 		const { activeTextEditor } = vscode.window;
@@ -20,15 +23,15 @@ export function activate(context: vscode.ExtensionContext) {
 
 		// If command is executed in shadow .ts file save it, remove it and point back to vue file
 		// point back to origi
-		if(activeFileLocation.endsWith('.vtpw.ts')) {
+		if(activeFileLocation.endsWith(SHADOW_TS_FILE_EXTENSION)) {
 			removeFileIfExists(activeFileLocation);
-			const vueFileLocation = `${activeFileLocation.replace('.vtpw.ts', '.vue')}`;
+			const vueFileLocation = `${activeFileLocation.replace(SHADOW_TS_FILE_EXTENSION, VUE_FILE_EXTENSION)}`;
 			const vueFileUri = vscode.Uri.file(vueFileLocation);
 			vscode.window.showTextDocument(vueFileUri);
 			return; // Stop execution
 		}
 
-		if (!activeFileLocation.endsWith('.vue')) {
+		if (!activeFileLocation.endsWith(VUE_FILE_EXTENSION)) {
 			vscode.window.showWarningMessage(`Works only for .vue files`);
 			return;
 		}
@@ -39,7 +42,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 		// Create new .vtpw.ts file next to .vue file
 		// Have to be in same location in order for all imports to work as expected
-		const tsFileLocation = `${vueFileLocation.replace('.vue', '.vtpw.ts')}`;
+		const tsFileLocation = `${vueFileLocation.replace(VUE_FILE_EXTENSION, SHADOW_TS_FILE_EXTENSION)}`;
 		await writeFile(tsFileLocation, validTsFileContent);
 
 		// Bring focus to newly created ts file (TODO: cursor position??)
