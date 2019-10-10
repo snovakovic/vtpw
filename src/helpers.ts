@@ -65,23 +65,23 @@ export function writeFile(path:string, content:string) {
 export function commentOutVueComponentTags(vueFile:string) {
   // TODO: improve with regex to be more flexible
   return vueFile
-    .replace('<template>', '/*vtpw<template>')
-    .replace('</template>', '</template>vtpw*/')
-    .replace('<style', '/*vtpw<style')
-    .replace('</style>', '</style>vtpw*/')
-    .replace('<script lang="ts">', '/*vtpw<script lang="ts">vtpw*/')
-    .replace('</script>', '/*vtpw</script>vtpw*/');
+    .replace('<template>', '/*<template>')
+    .replace('</template>', '</template>*/')
+    .replace('<style', '/*<style')
+    .replace('</style>', '</style>*/')
+    .replace('<script lang="ts">', '/*<script lang="ts">*/')
+    .replace('</script>', '/*</script>*/');
 }
 
 export function revertCommentingOutOfVueTags(tsFile:string) {
     // TODO: improve with regex to be more flexible
   return tsFile
-    .replace('/*vtpw<template>', '<template>')
-    .replace('</template>vtpw*/', '</template>')
-    .replace('/*vtpw<style', '<style')
-    .replace('</style>vtpw*/', '</style>')
-    .replace('/*vtpw<script lang="ts">vtpw*/', '<script lang="ts">')
-    .replace('/*vtpw</script>vtpw*/', '</script>');
+    .replace('/*<template>', '<template>')
+    .replace('</template>*/', '</template>')
+    .replace('/*<style', '<style')
+    .replace('</style>*/', '</style>')
+    .replace('/*<script lang="ts">*/', '<script lang="ts">')
+    .replace('/*</script>*/', '</script>');
 }
 
 // General helpers
