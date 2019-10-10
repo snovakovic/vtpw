@@ -80,8 +80,11 @@ export function revertCommentingOutOfVueTags(tsFile:string) {
     .replace('/*<template>', '<template>')
     .replace('</template>*/', '</template>')
     // NOTE: can be multiple style tags on page
-    .replace(new RegExp('/*<style', 'g'), '<style')
-    .replace(new RegExp('</style>*/', 'g'), '</style>')
+    .replace('/*<style', '<style')
+    .replace('</style>*/', '</style>')
+    // TODO: regex not working look into why??
+    // .replace(new RegExp('\/\*<style', 'g'), '<style')
+    // .replace(new RegExp('<\/style>\*\/', 'g'), '</style>')
     .replace('/*<script lang="ts">*/', '<script lang="ts">')
     .replace('/*</script>*/', '</script>');
 }
