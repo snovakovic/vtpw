@@ -10,21 +10,16 @@ export function removeFileIfExists(location:string) {
   });
 }
 
-// TODO: js-flock??
-export function promisify(fn:any) {
-  return function(this:any, ...args:any[]) {
-    return new Promise((resolve, reject) => {
-      args.push((err:any, ...result:any[]) => {
-        if (err) {
-          return reject(err);
-        }
+export function writeFile(path:string, content:string) {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(path, content, (err) => {
+      if (err) {
+        reject(err);
+      }
 
-        return resolve(result[0]);
-      });
-
-      fn.apply(this, args);
+      resolve();
     });
-  };
+  });
 }
 
 export function commentOutVueComponentTags(vueFile:string) {

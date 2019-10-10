@@ -1,13 +1,10 @@
 import * as vscode from 'vscode';
-import * as fs from 'fs';
 import {
 	commentOutVueComponentTags,
 	revertCommentingOutOfVueTags,
 	removeFileIfExists,
-	promisify,
-} from './utils';
-
-const writeFile = promisify(fs.writeFile);
+	writeFile,
+} from './helpers';
 
 export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('extension.vtpw', async () => {
