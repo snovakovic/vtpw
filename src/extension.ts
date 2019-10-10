@@ -34,7 +34,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 		const activeFileLocation = activeTextEditor.document.fileName;
 
-		// If command is executed in shadow TS file save it, remove it form disk and point back to original vue file
+		// If command is executed in shadow TS file ffirst save it then
+		// remove it form disk and focus to original vue file
 		if(activeFileLocation.endsWith(SHADOW_TS_FILE_EXTENSION)) {
 			removeFileIfExists(activeFileLocation);
 			const vueFileLocation = getVueFileLocationFromShadowTsFile(activeFileLocation);
@@ -44,8 +45,8 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 
 		if (!activeFileLocation.endsWith(VUE_FILE_EXTENSION)) {
-			vscode.window.showWarningMessage(`Works only for .vue files`);
-			return;
+			vscode.window.showWarningMessage(`Works only in .vue or .vtpw.ts files`);
+			return; // Stop execution
 		}
 
 		const vueFileLocation = activeFileLocation;
