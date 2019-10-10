@@ -8,9 +8,8 @@ import {
 	writeFile,
 	getVueFileLocationFromShadowTsFile,
 	getShadowTsFileLocationFromVueFile,
+	setCursorPositionOfActiveFileTo,
 } from './helpers';
-
-
 
 export function activate(context: vscode.ExtensionContext) {
 	// Check if we are saving shadow TS file. If we are sync content to the original vue file
@@ -37,10 +36,14 @@ export function activate(context: vscode.ExtensionContext) {
 		// If command is executed in shadow TS file ffirst save it then
 		// remove it form disk and focus to original vue file
 		if(activeFileLocation.endsWith(SHADOW_TS_FILE_EXTENSION)) {
+			const shadowTsFileCursorSelection = activeTextEditor.selection;
 			removeFileIfExists(activeFileLocation);
 			const vueFileLocation = getVueFileLocationFromShadowTsFile(activeFileLocation);
 			const vueFileUri = vscode.Uri.file(vueFileLocation);
-			vscode.window.showTextDocument(vueFileUri);
+			await vscode.window.showTextDocument(vueFileUri);
+
+			setCursorPositionOfActiveFileTo(shadowTsFileCursorSelection);
+
 			return; // Stop execution
 		}
 
@@ -50,6 +53,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 
 		const vueFileLocation = activeFileLocation;
+		const vueFileCursorSelection = activeTextEditor.selection;
 		const vueFileContent = activeTextEditor.document.getText();
 		const validTsFileContent = commentOutVueComponentTags(vueFileContent);
 
@@ -61,7 +65,9 @@ export function activate(context: vscode.ExtensionContext) {
 		// Bring focus to newly created ts file (TODO: cursor position??)
 		// const tsFileDocument = await workspace.openTextDocument(tsFileLocation);
 		const tsFileUri = vscode.Uri.file(tsFileLocation);
-		vscode.window.showTextDocument(tsFileUri);
+		await vscode.window.showTextDocument(tsFileUri);
+
+		setCursorPositionOfActiveFileTo(vueFileCursorSelection);
 	});
 
 	context.subscriptions.push(disposable);

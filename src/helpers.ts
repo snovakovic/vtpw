@@ -1,7 +1,19 @@
 import * as fs from 'fs';
+import * as vscode from 'vscode';
 
 export const SHADOW_TS_FILE_EXTENSION = '.vtpw.ts';
 export const VUE_FILE_EXTENSION = '.vue';
+
+// VS Code plugin helpers
+
+export function setCursorPositionOfActiveFileTo(selection:vscode.Selection) {
+  if (vscode.window.activeTextEditor) {
+    vscode.window.activeTextEditor.selection = new vscode.Selection(
+      selection.anchor,
+      selection.active,
+    );
+  }
+}
 
 // File system helpers
 
