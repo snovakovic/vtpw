@@ -64,11 +64,12 @@ export function writeFile(path:string, content:string) {
 
 export function commentOutVueComponentTags(vueFile:string) {
   // TODO: improve with regex to be more flexible
-  return vueFile
+
+  return replaceLastOccuranceOfString(vueFile, '</template>', '</template>*/')
     .replace('<template>', '/*<template>')
-    .replace('</template>', '</template>*/')
-    .replace('<style', '/*<style')
-    .replace('</style>', '</style>*/')
+    // NOTE: can be multiple style tags on page
+    .replace(new RegExp('<style', 'g'), '/*<style')
+    .replace(new RegExp('</style>', 'g'), '</style>*/')
     .replace('<script lang="ts">', '/*<script lang="ts">*/')
     .replace('</script>', '/*</script>*/');
 }
@@ -78,8 +79,9 @@ export function revertCommentingOutOfVueTags(tsFile:string) {
   return tsFile
     .replace('/*<template>', '<template>')
     .replace('</template>*/', '</template>')
-    .replace('/*<style', '<style')
-    .replace('</style>*/', '</style>')
+    // NOTE: can be multiple style tags on page
+    .replace(new RegExp('/*<style', 'g'), '<style')
+    .replace(new RegExp('</style>*/', 'g'), '</style>')
     .replace('/*<script lang="ts">*/', '<script lang="ts">')
     .replace('/*</script>*/', '</script>');
 }
@@ -87,3 +89,15 @@ export function revertCommentingOutOfVueTags(tsFile:string) {
 // General helpers
 
 export const last = (arr:any[]) => arr[arr.length -1];
+
+export function replaceLastOccuranceOfString(text:string, oldWord:string, newWord:string) {
+  var idx = text.lastIndexOf(oldWord);
+
+  // slice the string in 2, one from the start to the lastIndexOf
+  // and then replace the word in the rest
+  if(idx !== -1) {
+    text = text.slice(0, idx) + text.slice(idx).replace(oldWord, newWord);
+  }
+
+  return text;
+}
