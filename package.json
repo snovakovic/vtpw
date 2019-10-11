@@ -2,7 +2,7 @@
 	"name": "vetur-typescript-performance-workaround",
 	"displayName": "vetur-typescript-performance-workaround",
 	"description": "Workaround for the issue with the performance and intelisense speed of vue single file components in vetur when used together with TypeScript.",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"publisher": "snovakovic",
 	"author": {
 		"email": "stefan.novakovich@gmail.com",
