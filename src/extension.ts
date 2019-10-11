@@ -20,7 +20,8 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	});
 
-	let disposable = vscode.commands.registerCommand('vtpw.toggleShadowTsFile', async () => {
+	// Toggle between shadow TS file and vue file
+	const toggleShadowTsFileDisposable = vscode.commands.registerCommand('vtpw.toggleShadowTsFile', async () => {
 		const { activeTextEditor } = vscode.window;
 		if (!activeTextEditor) {
 			showFileNotCompatibleWarningMessage();
@@ -38,7 +39,26 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	});
 
-	context.subscriptions.push(disposable);
+	// Remove all shadow TS files from project
+	let removeShadowTsFilesDisposable = vscode.commands.registerCommand('vtpw.removeShadowTsFiles', async () => {
+		const shadowTsFiles = await vscode.workspace.findFiles(`**/*${SHADOW_TS_FILE_EXTENSION}`);
+
+		if(!shadowTsFiles.length) {
+			vscode.window.showInformationMessage(`No ${SHADOW_TS_FILE_EXTENSION} files found`);
+			return;
+		}
+
+		await Promise.all(
+			shadowTsFiles.map(file => {
+				return removeFileIfExists(file.path);
+			})
+		);
+
+		vscode.window.showInformationMessage(`Removed ${shadowTsFiles.length} files`);
+	});
+
+	context.subscriptions.push(toggleShadowTsFileDisposable);
+	context.subscriptions.push(removeShadowTsFilesDisposable);
 }
 
 // Implementations

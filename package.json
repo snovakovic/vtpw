@@ -20,7 +20,8 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:vtpw.toggleShadowTsFile"
+		"onCommand:vtpw.toggleShadowTsFile",
+		"onCommand:vtpw.removeShadowTsFiles"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -28,6 +29,10 @@
 			{
 				"command": "vtpw.toggleShadowTsFile",
 				"title": "vtpw: toggle between shadow .ts file and .vue file"
+			},
+			{
+				"command": "vtpw.removeShadowTsFiles",
+				"title": "vtpw: remove all shadow .ts files from project"
 			}
 		],
 		"keybindings": [
