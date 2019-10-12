@@ -1,4 +1,3 @@
-import * as fs from 'fs';
 import * as vscode from 'vscode';
 
 export const SHADOW_TS_FILE_EXTENSION = '.vtpw.ts';
@@ -38,26 +37,6 @@ export function getVueFileLocationFromShadowTsFile(tsFileLocation:string) {
 
 export function getShadowTsFileLocationFromVueFile(vueFileLocation:string) {
   return `${vueFileLocation.replace(VUE_FILE_EXTENSION, SHADOW_TS_FILE_EXTENSION)}`;
-}
-
-export function removeFileIfExists(location:string) {
-  fs.stat(location, (err) => {
-    if (!err) {
-      fs.unlink(location, () => {});
-    }
-  });
-}
-
-export function writeFile(path:string, content:string) {
-  return new Promise((resolve, reject) => {
-    fs.writeFile(path, content, (err) => {
-      if (err) {
-        reject(err);
-      }
-
-      resolve();
-    });
-  });
 }
 
 // Formating code helpers

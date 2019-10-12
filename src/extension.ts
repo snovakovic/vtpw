@@ -1,11 +1,10 @@
 import * as vscode from 'vscode';
+import { removeFileIfExists, writeFile, } from './fileUtils';
 import {
 	SHADOW_TS_FILE_EXTENSION,
 	VUE_FILE_EXTENSION,
 	commentOutVueComponentTags,
 	revertCommentingOutOfVueTags,
-	removeFileIfExists,
-	writeFile,
 	getVueFileLocationFromShadowTsFile,
 	getShadowTsFileLocationFromVueFile,
 	showFileNotCompatibleWarningMessage,
