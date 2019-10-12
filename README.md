@@ -29,13 +29,13 @@ In the first gif I try to create new `user` computed property in `.vue` file wit
 Important to note is that we don't have `IUser` interface or `store` imported and as you can notice editor don't
 auto import them for me or provide any suggestions :/
 
-https://raw.githubusercontent.com/snovakovic/vtpw/master/vue-file.gif
+![preview](https://raw.githubusercontent.com/snovakovic/vtpw/master/vue-file.gif)
 
 In second gif I try to do the same as above. just this time before starting to type anything to `.vue` file I have
 press `ctrl+alt+,` shortcut to position me in shadow `.vtpw.ts` file instead.
 As you can notice the editor experinace is much etter now with auto imports of dependedncies and intelisense poping up imediatly.
 
-https://raw.githubusercontent.com/snovakovic/vtpw/master/vtpw.gif
+![preview](https://raw.githubusercontent.com/snovakovic/vtpw/master/vtpw.gif)
 
 
 ## Extension Settings
