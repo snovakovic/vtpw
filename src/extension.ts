@@ -49,9 +49,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 
 		await Promise.all(
-			shadowTsFiles.map(file => {
-				return removeFileIfExists(file.path);
-			})
+			shadowTsFiles.map(file => removeFileIfExists(file.path))
 		);
 
 		vscode.window.showInformationMessage(`Removed ${shadowTsFiles.length} files`);
