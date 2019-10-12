@@ -17,7 +17,3 @@ to get real time TS suggestions without any lagging from Vetur plugin while deve
 Commenting out tags when toggling is limiting.
 
 ## Release Notes
-
-### 0.0.1
-
-Initial release.
