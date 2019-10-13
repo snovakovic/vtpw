@@ -1,7 +1,7 @@
 {
 	"name": "vtpw",
 	"displayName": "Vetur TypeScript performance workaround",
-	"description": "Workaround for the issue with the performance and intelisense speed of vue single file components in vetur when used together with TypeScript.",
+	"description": "Workaround for the performance issues with vetur plugin when used in combination with TypeScript",
 	"keywords": ["vetur", "vue", "typescript"],
 	"icon": "logo.png",
 	"version": "0.0.1",
