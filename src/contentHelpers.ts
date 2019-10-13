@@ -1,5 +1,4 @@
 import * as vscode from 'vscode';
-import { last } from './utils';
 
 export function mirorCursorAndScrollPosition({ from, to } : {
   from:vscode.TextEditor,
@@ -50,4 +49,10 @@ export function revertCommentingOutOfVueTags(tsFile:string) {
     // .replace(new RegExp('<\/style>\*\/', 'g'), '</style>')
     .replace('/*<script lang="ts">*/', '<script lang="ts">')
     .replace('/*</script>*/', '</script>');
+}
+
+// Helpers
+
+function last(arr:any[]) {
+  return arr[arr.length -1];
 }
