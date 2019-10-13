@@ -1,4 +1,6 @@
-# VTPW: **V**etur **T**ypeScript **P**erfomance **W**orkaround
+<p align="center"><img src="https://raw.githubusercontent.com/snovakovic/vtpw/master/logo.png" alt="logo"/></p>
+
+# **V**etur **T**ypeScript **P**erfomance **W**orkaround
 
 This plugin is crated to mitigate performance issue of popular vetur plugin when VUE single file components is used in combination with TypeScript.
 
