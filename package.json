@@ -4,7 +4,7 @@
 	"description": "Workaround for the issue with the performance and intelisense speed of vue single file components in vetur when used together with TypeScript.",
 	"keywords": ["vetur", "vue", "typescript"],
 	"icon": "logo.png",
-	"version": "0.2.0",
+	"version": "0.0.1",
 	"publisher": "snovakovic",
 	"author": {
 		"email": "stefan.novakovich@gmail.com",
