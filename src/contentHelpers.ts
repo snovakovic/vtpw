@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { replaceLastOccuranceOfString, last } from './utils';
+import { last } from './utils';
 
 export function mirorCursorAndScrollPosition({ from, to } : {
   from:vscode.TextEditor,
@@ -17,16 +17,22 @@ export function mirorCursorAndScrollPosition({ from, to } : {
   to.revealRange(last(from.visibleRanges));
 }
 
-export function commentOutVueComponentTags(vueFile:string) {
-  // TODO: improve with regex to be more flexible
-
-  return replaceLastOccuranceOfString(vueFile, '</template>', '</template>*/')
-    .replace('<template>', '/*<template>')
-    // NOTE: can be multiple style tags on page
-    .replace(new RegExp('<style', 'g'), '/*<style')
-    .replace(new RegExp('</style>', 'g'), '</style>*/')
-    .replace('<script lang="ts">', '/*<script lang="ts">*/')
-    .replace('</script>', '/*</script>*/');
+export function commentOutVueComponentTags(vueFileContent:string) {
+  return vueFileContent
+    // Comment out first occurenace of <template> tag allowing spaces as e.g < template >
+    .replace(/(<\s*template\s*>)/, '/*$1')
+    // Comment out last occurance of </template> tag allowing spaces as e.g </ template>
+    .replace(/(<\s*\/\s*template\s*>)(?![\s\S]*<\s*\/\s*template\s*>)/, '$1*/')
+    // Comment out first occurenace of <script **> tag allowing spaces any any text after script
+    // as e.g <script lang="ts">
+    .replace(/(<\s*script ?.*>)/, '/*$1')
+    // Comment out first occurenace of </script> tag allowing spaces
+    .replace(/(<\s*\/\s*script\s*>)/, '$1*/')
+    // Comment out all occurenace of <style **> tag allowing spaces any any text after stle
+    // as e.g <script lang="scss" scoped>
+    .replace(/(<\s*style ?.*>)/g, '/*$1')
+    // Comment out all occurenace of </style> tag allowing spaces
+    .replace(/(<\s*\/\s*style\s*>)/g, '$1*/');
 }
 
 export function revertCommentingOutOfVueTags(tsFile:string) {
