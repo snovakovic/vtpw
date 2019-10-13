@@ -1,9 +1,5 @@
 import * as vscode from 'vscode';
-
-export const SHADOW_TS_FILE_EXTENSION = '.vtpw.ts';
-export const VUE_FILE_EXTENSION = '.vue';
-
-// VS Code plugin helpers
+import { replaceLastOccuranceOfString, last } from './utils';
 
 export function mirorCursorAndScrollPosition({ from, to } : {
   from:vscode.TextEditor,
@@ -20,26 +16,6 @@ export function mirorCursorAndScrollPosition({ from, to } : {
 
   to.revealRange(last(from.visibleRanges));
 }
-
-export function showFileNotCompatibleWarningMessage() {
-  vscode
-    .window
-    .showWarningMessage(`Works only in ${VUE_FILE_EXTENSION} or ${SHADOW_TS_FILE_EXTENSION} files`);
-}
-
-// File system helpers
-
-export function getVueFileLocationFromShadowTsFile(tsFileLocation:string) {
-  return `${tsFileLocation
-      .replace(SHADOW_TS_FILE_EXTENSION, VUE_FILE_EXTENSION)}`;
-
-}
-
-export function getShadowTsFileLocationFromVueFile(vueFileLocation:string) {
-  return `${vueFileLocation.replace(VUE_FILE_EXTENSION, SHADOW_TS_FILE_EXTENSION)}`;
-}
-
-// Formating code helpers
 
 export function commentOutVueComponentTags(vueFile:string) {
   // TODO: improve with regex to be more flexible
@@ -68,20 +44,4 @@ export function revertCommentingOutOfVueTags(tsFile:string) {
     // .replace(new RegExp('<\/style>\*\/', 'g'), '</style>')
     .replace('/*<script lang="ts">*/', '<script lang="ts">')
     .replace('/*</script>*/', '</script>');
-}
-
-// General helpers
-
-export const last = (arr:any[]) => arr[arr.length -1];
-
-export function replaceLastOccuranceOfString(text:string, oldWord:string, newWord:string) {
-  var idx = text.lastIndexOf(oldWord);
-
-  // slice the string in 2, one from the start to the lastIndexOf
-  // and then replace the word in the rest
-  if(idx !== -1) {
-    text = text.slice(0, idx) + text.slice(idx).replace(oldWord, newWord);
-  }
-
-  return text;
 }

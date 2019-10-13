@@ -1,20 +1,24 @@
 import * as vscode from 'vscode';
-import { removeFileIfExists, writeFile, } from './fileUtils';
 import {
-	SHADOW_TS_FILE_EXTENSION,
-	VUE_FILE_EXTENSION,
-	commentOutVueComponentTags,
-	revertCommentingOutOfVueTags,
+	isVueFile,
+	isShadowTsFile,
+	findAllShadowTsFilesInProject,
 	getVueFileLocationFromShadowTsFile,
 	getShadowTsFileLocationFromVueFile,
 	showFileNotCompatibleWarningMessage,
+	removeFileIfExists,
+	writeFile,
+} from './fileHelpers';
+import {
+	commentOutVueComponentTags,
+	revertCommentingOutOfVueTags,
 	mirorCursorAndScrollPosition,
-} from './helpers';
+} from './contentHelpers';
 
 export function activate(context: vscode.ExtensionContext) {
 	// Check if we are saving shadow TS file. If we are sync content to the original vue file
 	vscode.workspace.onDidSaveTextDocument((doc) => {
-		if(doc.fileName.endsWith(SHADOW_TS_FILE_EXTENSION)) {
+		if(isShadowTsFile(doc.fileName)) {
 			syncShadowTsFileChangesWithVueFile(doc);
 		}
 	});
@@ -29,9 +33,9 @@ export function activate(context: vscode.ExtensionContext) {
 
 		const activeFileLocation = activeTextEditor.document.fileName;
 
-		if(activeFileLocation.endsWith(SHADOW_TS_FILE_EXTENSION)) {
+		if(isShadowTsFile(activeFileLocation)) {
 			removeActiveShadowTsFileAndPositionBackToOriginalVueFile(activeTextEditor);
-		} else if (activeFileLocation.endsWith(VUE_FILE_EXTENSION)) {
+		} else if (isVueFile(activeFileLocation)) {
 			createShadowTsFileFromActiveVueFile(activeTextEditor);
 		} else {
 			showFileNotCompatibleWarningMessage();
@@ -40,10 +44,10 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Remove all shadow TS files from project
 	let removeShadowTsFilesDisposable = vscode.commands.registerCommand('vtpw.removeShadowTsFiles', async () => {
-		const shadowTsFiles = await vscode.workspace.findFiles(`**/*${SHADOW_TS_FILE_EXTENSION}`);
+		const shadowTsFiles = await findAllShadowTsFilesInProject();
 
 		if(!shadowTsFiles.length) {
-			vscode.window.showInformationMessage(`No ${SHADOW_TS_FILE_EXTENSION} files found`);
+			vscode.window.showInformationMessage(`No shadow ts files found`);
 			return;
 		}
 
@@ -51,7 +55,7 @@ export function activate(context: vscode.ExtensionContext) {
 			shadowTsFiles.map(file => removeFileIfExists(file.path))
 		);
 
-		vscode.window.showInformationMessage(`Removed ${shadowTsFiles.length} files`);
+		vscode.window.showInformationMessage(`Removed ${shadowTsFiles.length} shadow ts files`);
 	});
 
 	context.subscriptions.push(toggleShadowTsFileDisposable);
