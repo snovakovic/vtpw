@@ -2,13 +2,13 @@
   <img 
        src="https://raw.githubusercontent.com/snovakovic/vtpw/master/logo.png" 
        alt="logo"
-       style="max-width: 150px"
+       width="150"
    />
 </p>
 
-# **V**etur **T**ypeScript **P**erfomance **W**orkaround
+# **V**etur **T**ypeScript **P**erformance **W**orkaround
 
-This plugin is crated to mitigate performance issue of popular vetur plugin when VUE single file components is used in combination with TypeScript.
+Plugin is crated to mitigate performance issue of popular vetur plugin when `.vue` single file components are used in combination with TypeScript.
 
 You can check more about performance issues on some of dedicated issues opened in vetur project:
 
@@ -18,18 +18,15 @@ You can check more about performance issues on some of dedicated issues opened i
 
 ## Features
 
-This plugin enables quick togling between `.vue` single file component and "shadow" TS file that sync back
-changes done to it back to original `.vue` file. Switching between vue and shadow TS file is done seamlessly
-without losing any contenxt by just hitting shortcut (by default shortcut is `ctrl+alt+,`)
+Main feature of this plugin is to enable quick seamless toggling between `.vue` single file component and "shadow" `.vtpw.ts` file without losing any context. All the change done in shadow `.vtpw.ts` file will be synced back to original `.vue` file on save.
 
-Reson to toggle to shadow `.vtpw.ts` file is to get editor/intelisense experinace as when working with any other normal `.ts` file
-withoput any lagging caused be vetur plugin. All the changes done to the `.vtpw.ts` file will be synced back to original vue file on save.
-When done with editing in shadow `.vtpw.ts` file just hit same shortcut to get back to original vue file with changes applied.
+The reason to toggle from `.vue` to `.vtpw.ts` is to get the same VS Code editor experiance as when working with any other TS file. No more performance issues, lagging or incomplete autocomple that occure in `.vue` single files components due to vetur. Check the gif's below to see comparison of typing same code in `.vue` and `vtpw.ts`
 
 ## Usage
 
-While working with this plugin it's recomended to add `*.vtpw.ts` to `.gitignore` to avoid shadow ts files popping up
-in git changes and to avoid unintentional commit of those files to source controll.
+It's recomended to add `*.vtpw.ts` to `.gitignore` to avoid shadow ts files showing up in git changes and to avoid unintentional commit of those files to source controll.
+
+Default shortcut to toggle between `.vue` and `.vtwp.ts` files is `ctrl+a+,`
 
 In the gif you can see intelisense/editor experiance when working in `.vue` file.
 
