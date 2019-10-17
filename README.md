@@ -8,7 +8,7 @@
 
 # **V**etur **T**ypeScript **P**erformance **W**orkaround
 
-Plugin is crated to mitigate performance issue of popular vetur plugin when `.vue` single file components are used in combination with TypeScript.
+Plugin is crated to mitigate performance issues of popular vetur plugin when `.vue` single file components are used in combination with TypeScript.
 
 You can check more about performance issues on some of dedicated issues opened in vetur project:
 
@@ -18,9 +18,9 @@ You can check more about performance issues on some of dedicated issues opened i
 
 ## Features
 
-Main feature of this plugin is to enable quick seamless toggling between `.vue` single file component and "shadow" `.vtpw.ts` file without losing any context. All the change done in shadow `.vtpw.ts` file will be synced back to original `.vue` file on save.
+Main feature of this plugin is to enable quick seamless toggling between `.vue` single file components and "shadow" `.vtpw.ts` files without losing any context. All the change done in shadow `.vtpw.ts` file will be synced back to original `.vue` file on save.
 
-The reason to toggle from `.vue` to `.vtpw.ts` is to get the same VS Code editor experiance as when working with any other TS file. No more performance issues, lagging or incomplete autocomple that occure in `.vue` single files components due to vetur. Check the gif's below to see comparison of typing same code in `.vue` and `vtpw.ts`
+The reason to toggle from `.vue` to `.vtpw.ts` is to get the same VS Code editor experiance as when working with any other TS file. No more performance issues, lagging or incomplete autocomple that occure in `.vue` single files components due to vetur. Check the gif's below to see comparison of typing same code in `.vue` and `.vtpw.ts` file
 
 ## Usage
 
@@ -28,17 +28,17 @@ It's recomended to add `*.vtpw.ts` to `.gitignore` to avoid shadow ts files show
 
 Default shortcut to toggle between `.vue` and `.vtwp.ts` files is `ctrl+a+,`
 
-In the gif you can see intelisense/editor experiance when working in `.vue` file.
+#### Programming in `.vue` files (example 1)
 
-In the first gif I try to create new `user` computed property in `.vue` file with `IUser` interface.
-Important to note is that we don't have `IUser` interface or `store` imported and as you can notice editor don't
-auto import them for me or provide any suggestions :/
+IN gif we are trying to create `user` computed property with `IUser` interface, As you can noticed in gif we need to manually import dependencies as editor is not doing that for us (as it shoud). You can also noticed that other intelisense features are eather limited. 
 
 ![preview](https://raw.githubusercontent.com/snovakovic/vtpw/master/vue-file.gif)
 
-In second gif I try to do the same as above. just this time before starting to type anything to `.vue` file I have
-press `ctrl+alt+,` shortcut to position me in shadow `.vtpw.ts` file instead.
-As you can notice the editor experinace is much etter now with auto imports of dependedncies and intelisense poping up imediatly.
+#### Programming in `.vtpw.ts` file (example 1)
+
+In here we are trying to do the same thing but this time before starting to type anything to `.vue` file we have hit `ctrl+alt-,` shortcut to position us to shadow `vtpw.ts` file (as you can notice we haven't lost any context by doing so)
+
+Now as you can see the developer experiance is much more enjojable with VS Code auto importing dependencies and live suggestion showing without any lagging. 
 
 ![preview](https://raw.githubusercontent.com/snovakovic/vtpw/master/vtpw.gif)
 
