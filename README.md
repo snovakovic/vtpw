@@ -8,7 +8,7 @@
 
 # **V**etur **T**ypeScript **P**erformance **W**orkaround
 
-Plugin is crated to mitigate performance issues of popular vetur plugin when `.vue` single file components are used in combination with TypeScript.
+This plugin was crated to mitigate performance issues of popular vetur plugin when `.vue` single file components are used in combination with TypeScript.
 
 You can check more about performance issues on some of dedicated issues opened in vetur project:
 
@@ -43,19 +43,17 @@ Now the developer experiance is much more enjojable with VS Code auto importing 
 ![preview](https://raw.githubusercontent.com/snovakovic/vtpw/master/vtpw.gif)
 
 
-## Extension Settings
+## Commands
 
-* `vtpw.toggleShadowTsFile`: Default shortcut `ctrl+alt+,`. If triggered while in `.vue` file
-it will crate new shadow `.vtpw.ts` file (and bring focus to it) that on save will sync changes back to original vue file.
-If same command is triggered while in `.vtpw.ts` file it will save changes (if any) remove that file from disk
-and bring back focus to original `.vue` file.
+* `vtpw.toggleShadowTsFile`: (default shortcut `ctrl+alt+,`)
+  * If in `.vue` file it will create shadow `.vtpw.ts` file and focus editor to it (on the same line cursor was position in `.vue` file)
+  * If in `.vtpw.ts` file it will save changes in that file, remove that file from the disk and focus editor to original `.vue` file (on the same line curso was position in `.vtpw.ts` file)
 
-* `vtpw.removeShadowTsFiles`: Removes all shadow `.vtpw.ts` files from project (if any). For now shadow files are removed only
-by triggering `vtpw.toggleShadowTsFile` when in shadow TS file. It's in plan to do automated cleaning of those files in next version of plugin but for now you can use this command to avoid piling up of `.vtpw.ts` files.
+* `vtpw.removeShadowTsFiles`: Removes all shadow `.vtpw.ts` files from project (if any). NOTE: this command will not save usaved changes in `vtpw.ts` files. 
 
 ## Known Issues
 
-1) At the time of wiritng there is no auto cleaning/removing of shadow `vtpw.ts` files from the project/disk when they are not longer used. If you press toggle shortcut `ctrl+alt+,`. while in `.vtpw.ts` file it will be removed from the disk. But if you don't toggle back to original `vue` file from `.vtpw.ts` that won't happen. As a workaround for now you can invoke `vtpw.removeShadowTsFiles` command. 
+1) At the time of wiritng there is no auto cleaning/removing of shadow `vtpw.ts` files from the project/disk when they are no longer used. If you toglge from `.vtpw.ts` to `.vue` file with `vtpw.toggleShadowTsFile`it will be removed from the disk. But if you don't thos shadow fils will stay on disk. For now as a workaround you can invoke `vtpw.removeShadowTsFiles` command to remove all shadow `.vtpw.ts` files from the project.  
 
 ## Release Notes
 
