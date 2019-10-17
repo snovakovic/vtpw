@@ -53,7 +53,7 @@ Now the developer experiance is much more enjojable with VS Code auto importing 
 
 ## Known Issues
 
-1) At the time of wiritng there is no auto cleaning/removing of shadow `vtpw.ts` files from the project/disk when they are no longer used. If you toglge from `.vtpw.ts` to `.vue` file with `vtpw.toggleShadowTsFile`it will be removed from the disk. But if you don't thos shadow fils will stay on disk. For now as a workaround you can invoke `vtpw.removeShadowTsFiles` command to remove all shadow `.vtpw.ts` files from the project.  
+1) At the time of wiritng there is no auto cleaning/removing of shadow `vtpw.ts` files from the project/disk when they are no longer used. If you toggle from `.vtpw.ts` to `.vue` file with `vtpw.toggleShadowTsFile`it will be removed from the disk but if you don't do that those shadow fils will stay on disk. For now as a workaround you can invoke `vtpw.removeShadowTsFiles` command to remove all shadow `.vtpw.ts` files from the project.  
 
 ## Release Notes
 
