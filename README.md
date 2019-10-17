@@ -1,4 +1,10 @@
-<p align="center"><img src="https://raw.githubusercontent.com/snovakovic/vtpw/master/logo.png" alt="logo"/></p>
+<p align="center">
+  <img 
+       src="https://raw.githubusercontent.com/snovakovic/vtpw/master/logo.png" 
+       alt="logo"
+       style="max-width: 150px"
+   />
+</p>
 
 # **V**etur **T**ypeScript **P**erfomance **W**orkaround
 
