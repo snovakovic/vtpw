@@ -28,17 +28,17 @@ It's recomended to add `*.vtpw.ts` to `.gitignore` to avoid shadow ts files show
 
 Default shortcut to toggle between `.vue` and `.vtwp.ts` files is `ctrl+a+,`
 
-#### Programming in `.vue` files (example 1)
+#### Programming in `.vue` file (example 1)
 
-IN gif we are trying to create `user` computed property with `IUser` interface, As you can noticed in gif we need to manually import dependencies as editor is not doing that for us (as it shoud). You can also noticed that other intelisense features are eather limited. 
+In gif below we are trying to create `user` computed property with `IUser` interface, As you can noticed we need to manually import dependencies as editor is not doing that for us (as it should). You can also notice that other intelisense features are eather slow or limited. 
 
 ![preview](https://raw.githubusercontent.com/snovakovic/vtpw/master/vue-file.gif)
 
-#### Programming in `.vtpw.ts` file (example 1)
+#### Programming in `.vtpw.ts` file (example 2)
 
-In here we are trying to do the same thing but this time before starting to type anything to `.vue` file we have hit `ctrl+alt-,` shortcut to position us to shadow `vtpw.ts` file (as you can notice we haven't lost any context by doing so)
+In here we are trying to do the same thing as in first example but this time before starting to type anything to `.vue` file we press `ctrl+alt-,` shortcut to position us to shadow `vtpw.ts` file (as you can notice we haven't lost any context by doing so)
 
-Now as you can see the developer experiance is much more enjojable with VS Code auto importing dependencies and live suggestion showing without any lagging. 
+Now the developer experiance is much more enjojable with VS Code auto importing dependencies and live suggestions showing up without any lagging. 
 
 ![preview](https://raw.githubusercontent.com/snovakovic/vtpw/master/vtpw.gif)
 
@@ -55,14 +55,10 @@ by triggering `vtpw.toggleShadowTsFile` when in shadow TS file. It's in plan to 
 
 ## Known Issues
 
-Commenting out tags when toggling is limiting.
+1) At the time of wiritng there is no auto cleaning/removing of shadow `vtpw.ts` files from the project/disk when they are not longer used. If you press toggle shortcut `ctrl+alt+,`. while in `.vtpw.ts` file it will be removed from the disk. But if you don't toggle back to original `vue` file from `.vtpw.ts` that won't happen. As a workaround for now you can invoke `vtpw.removeShadowTsFiles` command. 
 
 ## Release Notes
 
 ### 0.0.1
 
 Initial release.
-
-### 0.0.2
-
-Add removeShadowTsFiles command to remove all shadow .ts files from the project
