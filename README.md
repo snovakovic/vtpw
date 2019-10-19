@@ -26,11 +26,11 @@ The reason to toggle from `.vue` to `.vtpw.ts` file is to get the same VS Code e
 
 It's recommended to add `*.vtpw.ts` to `.gitignore` to avoid shadow ts files showing up in git changeset and to avoid unintentional commit of those files to source control.
 
-Default shortcut to toggle between `.vue` and `.vtwp.ts` files is `ctrl+a+,`
+Default shortcut to toggle between `.vue` and shadow `.vtwp.ts` file is `ctrl+a+,`
 
 #### Programming in `.vue` file (example 1)
 
-The first example demonstrates current editor experience when working in `.vue` files. In gif example we are trying to create `user` computed property with `IUser` interface. You can notice that editor is not auto importing dependencies and that intellisense is slow and limited.
+The first example demonstrates current editor experience when working in `.vue` file. In gif example we are trying to create `user` computed property with `IUser` interface. You can notice that editor is not auto importing dependencies and that intellisense is slow and limited.
 
 ![preview](https://raw.githubusercontent.com/snovakovic/vtpw/master/vue-file.gif)
 
