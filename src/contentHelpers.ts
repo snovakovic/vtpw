@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 
-export function mirorCursorAndScrollPosition({ from, to } : {
+export function mirrorCursorAndScrollPosition({ from, to } : {
   from:vscode.TextEditor,
   to?:vscode.TextEditor,
 }) {
@@ -18,19 +18,19 @@ export function mirorCursorAndScrollPosition({ from, to } : {
 
 export function commentOutVueComponentTags(vueFileContent:string) {
   return vueFileContent
-    // Comment out first occurenace of <template> tag allowing spaces as e.g < template >
+    // Comment out first occurrence of <template> tag allowing spaces as e.g < template >
     .replace(/(<\s*template\s*>)/, '/*$1')
-    // Comment out last occurance of </template> tag allowing spaces as e.g </ template>
+    // Comment out last occurrence of </template> tag allowing spaces as e.g </ template>
     .replace(/(<\s*\/\s*template\s*>)(?![\s\S]*<\s*\/\s*template\s*>)/, '$1*/')
-    // Comment out first occurenace of <script **> tag allowing spaces any any text after script
+    // Comment out first occurrence of <script **> tag allowing spaces any any text after script
     // as e.g <script lang="ts">
     .replace(/(<\s*script ?.*>)/, '/*$1*/')
-    // Comment out first occurenace of </script> tag allowing spaces
+    // Comment out first occurrence of </script> tag allowing spaces
     .replace(/(<\s*\/\s*script\s*>)/, '/*$1*/')
-    // Comment out all occurenace of <style **> tag allowing spaces any any text after stle
+    // Comment out all occurrence of <style **> tag allowing spaces any any text after stle
     // as e.g <script lang="scss" scoped>
     .replace(/(<\s*style ?.*>)/g, '/*$1')
-    // Comment out all occurenace of </style> tag allowing spaces
+    // Comment out all occurrence of </style> tag allowing spaces
     .replace(/(<\s*\/\s*style\s*>)/g, '$1*/');
 }
 

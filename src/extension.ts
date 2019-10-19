@@ -12,7 +12,7 @@ import {
 import {
 	commentOutVueComponentTags,
 	revertCommentingOutOfVueTags,
-	mirorCursorAndScrollPosition,
+	mirrorCursorAndScrollPosition,
 } from './contentHelpers';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -83,7 +83,7 @@ async function createShadowTsFileFromActiveVueFile(vueFileTextEditor:vscode.Text
 	await vscode.window.showTextDocument(tsFileUri);
 
 	// 5) Set cursor and scroll position of ts file to last position of vue file
-	mirorCursorAndScrollPosition({
+	mirrorCursorAndScrollPosition({
 		from: vueFileTextEditor,
 		to: vscode.window.activeTextEditor,
 	});
@@ -104,7 +104,7 @@ async function removeActiveShadowTsFileAndPositionBackToOriginalVueFile(shadowTs
 	await vscode.window.showTextDocument(vueFileUri);
 
 	// 4) Set cursor position of vue file to last cursor position of shadow TS file
-	mirorCursorAndScrollPosition({
+	mirrorCursorAndScrollPosition({
 		from: shadowTsFileTextEditor,
 		to: vscode.window.activeTextEditor,
 	});
