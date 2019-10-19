@@ -10,7 +10,7 @@
 
 This plugin was crated to mitigate performance issues of popular vetur plugin when `.vue` single file components are used in combination with TypeScript.
 
-You can check more about performance issues on some of dedicated issues opened in vetur project:
+You can check more about performance issues in vetur project issues:
 
 * https://github.com/vuejs/vetur/issues/1051
 * https://github.com/vuejs/vetur/issues/784
@@ -30,15 +30,13 @@ Default shortcut to toggle between `.vue` and `.vtwp.ts` files is `ctrl+a+,`
 
 #### Programming in `.vue` file (example 1)
 
-In gif below we are trying to create `user` computed property with `IUser` interface, As you can noticed we need to manually import dependencies as editor is not doing that for us (as it should). You can also notice that other intellisense features are either slow or limited. 
+The first example demonstrates current editor experience when working in `.vue` files. In gif example we are trying to create `user` computed property with `IUser` interface. You can notice that editor is not auto importing dependencies and that intellisense are slow and limited. 
 
 ![preview](https://raw.githubusercontent.com/snovakovic/vtpw/master/vue-file.gif)
 
 #### Programming in `.vtpw.ts` file (example 2)
 
-In here we are trying to do the same thing as in the first example, but this time before starting to type anything in `.vue` file we press `ctrl+alt-,` shortcut to position us to shadow `vtpw.ts` file (as you can notice we haven't lost any context by doing so)
-
-Now the developer experience is much more enjoyable with VS Code auto importing dependencies and suggestions showing up as we type without any lagging. 
+In the second example we are trying to do the same thing as in the first example, but this time before starting to type anything in `.vue` file we pressed `ctrl+alt-,` shortcut to position us to shadow `vtpw.ts` file. As you can notice we haven't lost any context by doing so. The editor experience is now much more enjoyable with VS Code auto importing dependencies and suggestions showing up as we type without any lagging. 
 
 ![preview](https://raw.githubusercontent.com/snovakovic/vtpw/master/vtpw.gif)
 
@@ -53,7 +51,7 @@ Now the developer experience is much more enjoyable with VS Code auto importing 
 
 ## Known Issues
 
-1) At the time of wiritng there is no auto cleaning/removing of shadow `vtpw.ts` files from the project/disk when they are no longer used. If you toggle from `.vtpw.ts` to `.vue` file with `vtpw.toggleShadowTsFile`it will be removed from the disk but if you don't do that those shadow fils will stay on disk. For now as a workaround you can invoke `vtpw.removeShadowTsFiles` command to remove all shadow `.vtpw.ts` files from the project.  
+1) At the time of wiritng there is no auto cleaning/removing of shadow `vtpw.ts` files from the project/disk when they are no longer used. Shadow ts files are removed form the disk if you toggle from `.vtpw.ts` to `.vue` file with `vtpw.toggleShadowTsFile`command, otherwise they stay on the disk. For now as a workaround you can invoke `vtpw.removeShadowTsFiles` command to remove all shadow `.vtpw.ts` files from the project.  
 
 ## Release Notes
 
