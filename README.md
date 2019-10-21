@@ -32,13 +32,13 @@ Default shortcut to toggle between `.vue` and shadow `.vtwp.ts` file is `ctrl+a+
 
 The first example demonstrates current editor experience when working in `.vue` file. In gif example we are trying to create `user` computed property with `IUser` interface. You can notice that editor is not auto importing dependencies and that intellisense is slow and limited.
 
-![preview](https://raw.githubusercontent.com/snovakovic/vtpw/master/vue-file.gif)
+![preview](https://raw.githubusercontent.com/snovakovic/vtpw/master/vue-example.gif)
 
 #### Programming in `.vtpw.ts` file (example 2)
 
 In the second example we are trying to do the same thing as in the first example, but this time before starting to type anything in `.vue` file we pressed `ctrl+alt-,` shortcut to position us to shadow `vtpw.ts` file. As you can notice we haven't lost any context by doing so. The editor experience is now much more enjoyable with VS Code auto importing dependencies and suggestions showing up as we type without any lagging.
 
-![preview](https://raw.githubusercontent.com/snovakovic/vtpw/master/vtpw.gif)
+![preview](https://raw.githubusercontent.com/snovakovic/vtpw/master/vtpw-example.gif)
 
 
 ## Commands
