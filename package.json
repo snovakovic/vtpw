@@ -41,7 +41,7 @@
       {
         "command": "vtpw.toggleShadowTsFile",
         "key": "ctrl+alt+,",
-        "mac": "cmd+alt+l",
+        "mac": "cmd+alt+,",
         "when": "editorTextFocus"
       }
     ]
