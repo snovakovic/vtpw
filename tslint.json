@@ -5,6 +5,7 @@
 		"no-duplicate-variable": true,
 		"curly": true,
 		"class-name": true,
+		"indent": [true, "spaces", 2],
 		"semicolon": [
 			true,
 			"always"

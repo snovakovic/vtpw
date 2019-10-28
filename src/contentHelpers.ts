@@ -27,7 +27,7 @@ export function commentOutVueComponentTags(vueFileContent:string) {
     .replace(/(<\s*script ?.*>)/, '/*$1*/')
     // Comment out first occurrence of </script> tag allowing spaces
     .replace(/(<\s*\/\s*script\s*>)/, '/*$1*/')
-    // Comment out all occurrence of <style **> tag allowing spaces any any text after stle
+    // Comment out all occurrence of <style **> tag allowing spaces and any text after style
     // as e.g <script lang="scss" scoped>
     .replace(/(<\s*style ?.*>)/g, '/*$1')
     // Comment out all occurrence of </style> tag allowing spaces
