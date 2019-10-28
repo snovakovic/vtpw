@@ -4,7 +4,7 @@
 	"description": "Workaround for the performance issues with vetur plugin when used in combination with TypeScript",
 	"keywords": ["vetur", "vue", "typescript"],
 	"icon": "logo.png",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"publisher": "snovakovic",
 	"author": {
 		"email": "stefan.novakovich@gmail.com",
