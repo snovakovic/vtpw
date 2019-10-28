@@ -26,7 +26,7 @@ The reason to toggle from `.vue` to `.vtpw.ts` file is to get the same VS Code e
 
 It's recommended to add `*.vtpw.ts` to `.gitignore` to avoid shadow ts files showing up in git changeset and to avoid unintentional commit of those files to source control.
 
-Default shortcut to toggle between `.vue` and shadow `.vtwp.ts` file is `ctrl+alt+,` (or `cmd+alt+,`)
+Default shortcut to toggle between `.vue` and shadow `.vtwp.ts` file is `ctrl+alt+,` (or `cmd+alt+,` on mac)
 
 #### Programming in `.vue` file (example 1)
 
