@@ -18,8 +18,9 @@ export function mirrorCursorAndScrollPosition({ from, to } : {
 
 export function commentOutVueComponentTags(vueFileContent:string) {
   return vueFileContent
-    // Comment out first occurrence of <template> tag allowing spaces as e.g < template >
-    .replace(/(<\s*template\s*>)/, '/*$1')
+    // Comment out first occurrence of <template **> tag allowing spaces as e.g < template >
+    // as e.g <template lang="pug">
+    .replace(/(<\s*template ?.*>)/, '/*$1')
     // Comment out last occurrence of </template> tag allowing spaces as e.g </ template>
     .replace(/(<\s*\/\s*template\s*>)(?![\s\S]*<\s*\/\s*template\s*>)/, '$1*/')
     // Comment out first occurrence of <script **> tag allowing spaces any any text after script
@@ -36,7 +37,7 @@ export function commentOutVueComponentTags(vueFileContent:string) {
 
 export function revertCommentingOutOfVueTags(tsFileContent:string) {
   return tsFileContent
-    .replace(/\/\*(<\s*template\s*>)/, '$1')
+    .replace(/\/\*(<\s*template ?.*>)/, '$1')
     .replace(/(<\s*\/\s*template\s*>)(?![\s\S]*<\s*\/\s*template\s*>)\*\//, '$1')
     .replace(/\/\*(<\s*script ?.*>)\*\//, '$1')
     .replace(/\/\*(<\s*\/\s*script\s*>)\*\//, '$1')
