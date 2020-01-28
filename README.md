@@ -61,4 +61,4 @@ Initial release.
 
 ### 0.0.5
 
-Allow using plugin on projects that use template plugins thanks to @szkabaroli [contribution](https://github.com/snovakovic/vtpw/pull/2)
+Allow using plugin on projects that use template languages thanks to @szkabaroli [contribution](https://github.com/snovakovic/vtpw/pull/2)
