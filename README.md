@@ -58,3 +58,7 @@ In the second example we are trying to do the same thing as in the first example
 ### 0.0.1
 
 Initial release.
+
+### 0.0.5
+
+Allow using plugin together with template languages as e.g <template lang="pug"> (Thanks to @szkabaroli contribution https://github.com/snovakovic/vtpw/pull/2)
