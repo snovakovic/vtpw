@@ -62,3 +62,8 @@ Initial release.
 ### 0.0.5
 
 Allow using plugin on projects that use template languages thanks to @szkabaroli [contribution](https://github.com/snovakovic/vtpw/pull/2)
+
+### 0.1.0
+
+Fixes issue when there is /**/ type of comments inside of the style tag
+https://github.com/snovakovic/vtpw/issues/3
