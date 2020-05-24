@@ -12,7 +12,8 @@ import {
 import {
   commentOutVueComponentTags,
   revertCommentingOutOfVueTags,
-  mirrorCursorAndScrollPosition,
+  getCursorAndScrollPosition,
+  setCursorAndScrollPosition,
 } from './contentHelpers';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -83,9 +84,9 @@ async function createShadowTsFileFromActiveVueFile(vueFileTextEditor:vscode.Text
   await vscode.window.showTextDocument(tsFileUri);
 
   // 5) Set cursor and scroll position of ts file to last position of vue file
-  mirrorCursorAndScrollPosition({
-    from: vueFileTextEditor,
-    to: vscode.window.activeTextEditor,
+  setCursorAndScrollPosition({
+    editor: vscode.window.activeTextEditor,
+    setTo: getCursorAndScrollPosition(vueFileTextEditor),
   });
 }
 
@@ -95,18 +96,21 @@ async function removeActiveShadowTsFileAndPositionBackToOriginalVueFile(shadowTs
   // 1) Save TS file
   await shadowTsFileTextEditor.document.save();
 
-  // 2) Remove TS file
+  // 2) Get cursor position before opening .vue file as it will be lost after 
+  const shadowTsFileCursorAndScrollPosition = getCursorAndScrollPosition(shadowTsFileTextEditor);
+
+  // 3) Remove TS file
   removeFileIfExists(tsFileLocation);
 
-  // 3) Open original vue file
+  // 4) Open original vue file
   const vueFileLocation = getVueFileLocationFromShadowTsFile(tsFileLocation);
   const vueFileUri = vscode.Uri.file(vueFileLocation);
   await vscode.window.showTextDocument(vueFileUri);
 
-  // 4) Set cursor position of vue file to last cursor position of shadow TS file
-  mirrorCursorAndScrollPosition({
-    from: shadowTsFileTextEditor,
-    to: vscode.window.activeTextEditor,
+  // 5) Set cursor position of vue file to last cursor position of shadow TS file
+  setCursorAndScrollPosition({
+    editor: vscode.window.activeTextEditor,
+    setTo: shadowTsFileCursorAndScrollPosition,
   });
 }
 

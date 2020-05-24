@@ -67,3 +67,7 @@ Allow using plugin on projects that use template languages thanks to @szkabaroli
 
 Fixes issue when there is /**/ type of comments inside of the style tag
 https://github.com/snovakovic/vtpw/issues/3
+
+### 0.1.2
+
+Fix restoring cursor and scroll position after moving from shadow vtpw file to .vue file

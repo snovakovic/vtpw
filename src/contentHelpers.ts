@@ -1,19 +1,26 @@
 import * as vscode from 'vscode';
+import { Range } from 'vscode';
 
-export function mirrorCursorAndScrollPosition({ from, to } : {
-  from:vscode.TextEditor,
-  to?:vscode.TextEditor,
+export function getCursorAndScrollPosition(editor:vscode.TextEditor) {
+  const visibleRange = last(editor.visibleRanges);
+
+  return {
+    selection: new vscode.Selection(
+      editor.selection.anchor,
+      editor.selection.active,
+    ),
+    visibleRange: visibleRange && new Range(visibleRange.start, visibleRange.end),
+  };
+}
+
+export function setCursorAndScrollPosition({ editor, setTo }: {
+  editor?: vscode.TextEditor,
+  setTo: ReturnType<typeof getCursorAndScrollPosition>,
 }) {
-  if (!to) {
-    return;
+  if (editor) {
+    editor.selection = setTo.selection;
+    editor.revealRange(setTo.visibleRange);
   }
-
-  to.selection = new vscode.Selection(
-    from.selection.anchor,
-    from.selection.active,
-  );
-
-  to.revealRange(last(from.visibleRanges));
 }
 
 export function commentOutVueComponentTags(vueFileContent:string) {
@@ -52,6 +59,6 @@ export function revertCommentingOutOfVueTags(tsFileContent:string) {
 
 // Helpers
 
-function last(arr:any[]) {
+function last<T>(arr:T[]):T {
   return arr[arr.length -1];
 }
