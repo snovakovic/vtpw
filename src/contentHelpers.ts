@@ -29,7 +29,7 @@ export function commentOutVueComponentTags(vueFileContent:string) {
     // Comment out first occurrence of </script> tag allowing spaces
     .replace(/(<\s*\/\s*script\s*>)/, '/*$1*/')
     // Escape /* some comment */ type of the comments inside of the style tags with 
-    // /* some comment *'/ so that it don't mess up with commenting whole style section
+    // /* some comment *./ so that it don't mess up with commenting whole style section
     // For more info check issue: https://github.com/snovakovic/vtpw/issues/3
     .replace(/(?<=(<\s*style ?.*>)([\s\S]*))(\*\/)(?=([\s\S]*)(<\s*\/\s*style\s*>))/g, "\*.\/")
     // Comment out all occurrence of <style **> tag allowing spaces and any text after style
