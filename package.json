@@ -2,7 +2,11 @@
 	"name": "vtpw",
 	"displayName": "Vetur TypeScript performance workaround",
 	"description": "Workaround for the performance issues with vetur plugin when used in combination with TypeScript",
-	"keywords": ["vetur", "vue", "typescript"],
+	"keywords": [
+		"vetur",
+		"vue",
+		"typescript"
+	],
 	"icon": "logo.png",
 	"version": "0.0.5",
 	"publisher": "snovakovic",
@@ -38,13 +42,13 @@
 			}
 		],
 		"keybindings": [
-      {
-        "command": "vtpw.toggleShadowTsFile",
-        "key": "ctrl+alt+,",
-        "mac": "cmd+alt+,",
-        "when": "editorTextFocus"
-      }
-    ]
+			{
+				"command": "vtpw.toggleShadowTsFile",
+				"key": "ctrl+alt+,",
+				"mac": "cmd+alt+,",
+				"when": "editorTextFocus"
+			}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
