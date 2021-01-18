@@ -36,7 +36,7 @@ The first example demonstrates current editor experience when working in `.vue` 
 
 #### Programming in `.vtpw.ts` file (example 2)
 
-In the second example we are trying to do the same thing as in the first example, but this time before starting to type anything in `.vue` file we pressed `ctrl+alt-,` shortcut to position us to shadow `vtpw.ts` file. As you can notice we haven't lost any context by doing so. The editor experience is now much more enjoyable with VS Code auto importing dependencies and suggestions showing up as we type without any lagging.
+In the second example we are trying to do the same thing as in the first example, but this time before starting to type anything in `.vue` file we pressed `ctrl+alt+,` shortcut to position us to shadow `vtpw.ts` file. As you can notice we haven't lost any context by doing so. The editor experience is now much more enjoyable with VS Code auto importing dependencies and suggestions showing up as we type without any lagging.
 
 ![preview](https://raw.githubusercontent.com/snovakovic/vtpw/master/vtpw-example.gif)
 
